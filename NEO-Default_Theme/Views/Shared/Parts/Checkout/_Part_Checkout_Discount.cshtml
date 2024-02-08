@@ -1,0 +1,62 @@
+﻿@model List<DomainCheckout.Entities.PaymentGateway>
+<div class="descontos relaxed list display grid">
+    @{
+        bool IsRecurrent = Convert.ToBoolean(TempData["IsRecurrent"]);
+    }
+
+    @if (!IsRecurrent)
+    {
+        foreach (var gateway in Model)
+        {
+            foreach (var method in gateway.PaymentMethods)
+            {
+                foreach (var brand in method.PaymentBrands)
+                {
+                    if (brand.Discount > 0)
+                    {
+                        decimal _exibeDesconto = 0;
+                        if (ViewBag.TotalCarrinho != null)
+                        {
+                            if (LojaCorp.Control.Company._Company.DescontoTotalProduto)
+                            {
+                                if ((ViewBag.TotalProduto - ViewBag.TotalDiscount) >= brand.ValMinDiscount)
+                                {
+                                    _exibeDesconto = Math.Round((ViewBag.TotalCarrinho - ((ViewBag.TotalProduto - ViewBag.TotalDiscount) * brand.Discount) / 100), 2);
+                                }
+                            }
+                            else
+                            {
+                                if (ViewBag.TotalCarrinho >= brand.ValMinDiscount)
+                                {
+                                    _exibeDesconto = Math.Round(ViewBag.TotalCarrinho - (ViewBag.TotalCarrinho * brand.Discount) / 100, 2);
+                                }
+                            }
+                        }
+                        if (_exibeDesconto > 0 && ViewBag.TotalCarrinho > _exibeDesconto)
+                        {
+                            <div class="item">
+                                <div class="content">
+                                    <p class="ui header">
+                                        @if(brand.typeDiscount == DomainCheckout.Entities.typeDiscount.FirstInstalment)
+                                        {
+                                            <span class="text small color green left floated">
+                                                No @brand.NamePayment (@brand.Discount% de desconto) à vista
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text small color green left floated">
+                                                No @brand.NamePayment (@brand.Discount% de desconto)
+                                            </span>
+                                        }               
+                                    <span class="ui label green margin none right floated">@string.Format("{0}", _exibeDesconto.ToString("C"))</span>
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
+        }
+    }
+</div>

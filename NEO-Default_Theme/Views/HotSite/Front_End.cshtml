@@ -1,0 +1,99 @@
+@{   
+
+    ViewBag.Title = string.IsNullOrEmpty(LojaCorp.Control.Company._Company.Title) ? LojaCorp.Control.Company._Company.NameStore : LojaCorp.Control.Company._Company.Title;
+    Layout = "~/Views/Shared/Base/_Layout.cshtml";
+
+    string PathLogo = "/assets/image/logo/logo.png";
+
+    Uri Url = System.Web.HttpContext.Current.Request.Url;
+
+    string UrlLogo = Url.Scheme + "://" + Url.Host + PathLogo;
+
+}
+
+@section CustomSeo{
+    @{
+
+        <meta property="og:title" content="@ViewBag.Title" />
+        <meta property="og:image" content="@UrlLogo" />
+    }
+}
+
+    <div id="certificacao" class="ui grid middle aligned center aligned">
+        <div class="row">
+            <div class="ten wide computer sixteen wide tablet sixteen wide mobile column">
+
+                <div class="dados-disponiveis">
+                    <p>Existem dados gravados: <a href="#">Carregar Dados</a></p>
+                </div>
+
+                <form action="/hotsite/Front_End" id="form-certificacao" class="ui large form certificacao" method="get">
+                    <div class="ui segment">
+                        <div class="ui grid  very relaxed stackable middle aligned grid left aligned">
+                            <div class="row one column">
+                                <div class="column">
+                                    <div class="field">
+                                        <label for="nome">Nome</label>
+                                        <div class="ui left icon input">
+                                            <i class="user icon"></i>
+                                            <input id="nome" type="text" maxlength="100" name="nome" placeholder="Nome" value="">
+                                            <div class="valor"></div>
+                                        </div>
+                                    </div>
+                                    <div class="field required">
+                                        <label for="email">E-mail</label>
+                                        <div class="ui left icon input">
+                                            <i class="mail icon"></i>
+                                            <input id="email" type="text" maxlength="100" name="email" placeholder="E-mail" value="">
+                                            <div class="valor"></div>
+                                        </div>
+                                    </div>
+                                    <div class="field required">
+                                        <label for="telefone">Telefone</label>
+                                        <div class="ui left icon input">
+                                            <i class="phone icon"></i>
+                                            <input id="telefone" type="text" maxlength="15" name="telefone" placeholder="(00) 00000-0000" class="masked mask_phone">
+                                            <div class="valor"></div>
+                                        </div>
+                                    </div>
+                                    <div class="field required">
+                                        <label for="assunto">Assunto</label>
+                                        <div class="ui left icon input">
+                                            <i class="comment icon"></i>
+                                            <input id="assunto" type="text" maxlength="100" name="assunto" placeholder="Assunto" value="">
+                                            <div class="valor"></div>
+                                        </div>
+                                    </div>
+                                    <div class="field required">
+                                        <label>Mensagem</label>
+                                        <textarea id="mensagem" maxlength="1000" name="mensagem" placeholder="Mensagem"></textarea>
+                                        <div class="valor"></div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row one column">
+                                <div class="column">
+                                    <div class="area-conteudo">
+                                        <button id="btn-salvar" type="submit" class="ui animated button large submit primary right floated continuar" tabindex="0">
+                                            <div class="visible content">Enviar</div>
+                                            <div class="hidden content">
+                                                <i class="send icon"></i>
+                                            </div>
+                                        </button>    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row one column">
+                                <div class="column">
+                                    <div class="area-conteudo">
+                                        <div class="ui error message"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>        
+            </div>
+        </div>
+    </div>

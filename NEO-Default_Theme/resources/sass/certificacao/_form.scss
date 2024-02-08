@@ -1,0 +1,33 @@
+#certificacao .dados-disponiveis{
+    display: none;
+    padding: 15px;
+    background-color: #248140;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#certificacao .dados-disponiveis a{
+    color: #fff;
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+form.certificacao input,
+form.certificacao .area-conteudo{
+    max-width: 65% !important;
+}
+
+form.certificacao textarea{
+    font-family: 'Lato';
+    max-width: 65% !important; 
+    float:left;
+}
+
+form.certificacao .valor{
+    padding: 9px 20px; 
+    float: left; 
+    max-width: 34%; 
+    overflow: hidden;
+}
